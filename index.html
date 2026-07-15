@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafios e Perspectivas da Educação Escolar Quilombola</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================================
+           CONFIGURAÇÃO DE PÁGINA A4 - 100% LIVRE DE MARGENS
+           ========================================================= */
+        @page {
+            size: A4 landscape;
+            margin: 0; /* Margem zero para a imagem preencher tudo */
+        }
+
+        :root {
+            --primary-brown: #884A35;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', 'Arial', sans-serif;
+            background-color: #FFFFFF;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+        }
+
+        /* ESTRUTURA DO SLIDE: Tamanho exato da folha A4 Paisagem (297mm x 210mm) */
+        .slide {
+            width: 100%;
+            height: 210mm;
+            page-break-after: always;
+            page-break-inside: avoid;
+            box-sizing: border-box;
+            position: relative;
+            padding: 0;
+            background-color: var(--white);
+        }
+
+        .slide:first-child {
+            page-break-before: avoid;
+        }
+
+        /* =========================================================
+           SLIDE 1: CAPA (100% 100% preenche a tela)
+           ========================================================= */
+        .slide-cover-table {
+            display: table;
+            width: 100%;
+            height: 100%; /* Ocupa toda a altura de 210mm */
+            background-image: url('assets/slide1.jpg');
+            background-size: 100% 100% !important;
+            background-position: center center !important;
+            background-repeat: no-repeat !important;
+            background-color: var(--white);
+        }
+
+        .slide-cover-cell {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+            padding: 40px;
+            padding-top: 20%;
+        }
+
+        .cover-title-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22pt;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .cover-subtitle-text {
+            font-size: 11pt;
+            color: #333333;
+            font-weight: 400;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .cover-authors-text {
+            font-size: 12pt;
+            color: #000000;
+            font-weight: 600;
+        }
+
+        /* =========================================================
+           SLIDES DE CONTEÚDO (2 AO 10) - Esticados para preencher a tela
+           ========================================================= */
+        .slide-content {
+            width: 100%;
+            height: 100%;
+            background-image: url('assets/slide2.jpg');
+            background-position: top center !important;
+            background-repeat: no-repeat !important;
+            /* ALTERAÇÃO AQUI: Força a imagem a esticar e preencher 100% da altura */
+            background-size: 100% 100% !important; 
+            padding: 25mm 15mm 15mm 15mm;
+            display: table;
+            table-layout: fixed;
+        }
+
+        .slide-header {
+            width: 100%;
+            border-bottom: 3px solid var(--primary-brown);
+            padding-bottom: 6px;
+            margin-bottom: 10px;
+        }
+
+        .slide-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18pt;
+            color: var(--primary-brown);
+            margin: 0;
+            display: block;
+        }
+
+        .layout-table {
+            display: table;
+            width: 100%;
+            height: calc(100% - 45px); /* Garante que pegue todo o espaço abaixo do título */
+            table-layout: fixed;
+        }
+
+        .text-column-cell {
+            display: table-cell;
+            width: 58%;
+            vertical-align: top;
+            padding-right: 15px;
+            height: 100%;
+        }
+
+        .image-column-cell {
+            display: table-cell;
+            width: 42%;
+            vertical-align: middle;
+            text-align: center;
+            height: 100%;
+        }
+
+        .text-full-width {
+            width: 100%;
+            height: calc(100% - 45px);
+            display: block;
+        }
+
+        /* ESTILIZAÇÃO DOS TÓPICOS */
+        ul {
+            padding-left: 5px;
+            list-style-type: none;
+        }
+
+        li {
+            margin-bottom: 12px;
+            font-size: 10.5pt;
+            line-height: 1.5;
+            position: relative;
+            padding-left: 22px;
+            text-align: justify;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--primary-brown);
+            font-weight: bold;
+            font-size: 14pt;
+            position: absolute;
+            left: 0px;
+            top: -2px;
+        }
+
+        ul ul {
+            margin-top: 6px;
+            padding-left: 10px;
+        }
+
+        ul ul li {
+            margin-bottom: 6px;
+            font-size: 10pt;
+        }
+
+        ul ul li::before {
+            content: "–";
+            font-size: 12pt;
+            color: #666666;
+            top: 0;
+        }
+
+        /* IMAGENS LATERAIS */
+        .slide-image {
+            width: 100%;
+            max-height: 100%;
+            border-radius: 6px;
+            object-fit: contain; /* Impede que a imagem seja cortada no PDF */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+            background: #fff;
+        }
+
+        /* --- SLIDE 10: BIBLIOGRAFIA --- */
+        .biblio-table {
+            display: table;
+            width: 100%;
+            height: calc(100% - 45px);
+            table-layout: fixed;
+        }
+
+        .biblio-column-cell {
+            display: table-cell;
+            width: 50%;
+            vertical-align: top;
+            padding-right: 15px;
+            height: 100%;
+        }
+        
+        .biblio-section {
+            margin-bottom: 12px;
+        }
+
+        .biblio-section h3 {
+            color: var(--primary-brown);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10.5pt;
+            margin-top: 5px;
+            margin-bottom: 6px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 3px;
+        }
+
+        .biblio-section p {
+            font-size: 8.5pt;
+            margin-bottom: 4px;
+            line-height: 1.4;
+            text-align: justify;
+        }
+
+        /* =========================================================
+           SLIDE 11: FONTES DAS IMAGENS (COM RODAPÉ COLADO NO FUNDO)
+           ========================================================= */
+        .slide-image-sources {
+            background-color: #FAF9F6;
+            display: table;
+            width: 100%;
+            height: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        .sources-row-head { display: table-row; height: auto; }
+        .sources-row-body { display: table-row; height: 100%; }
+        .sources-row-foot { display: table-row; height: auto; }
+
+        .sources-header-bar {
+            width: 100%;
+            height: 35px;
+            background-color: #8B3A2B;
+            display: block;
+        }
+
+        .sources-body {
+            padding: 15mm 15mm;
+            display: table-cell;
+            vertical-align: top;
+            height: 100%;
+        }
+
+        .sources-title {
+            font-family: 'Georgia', serif;
+            color: #8B3A2B;
+            font-size: 22pt;
+            margin-bottom: 15px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .sources-table-inner {
+            display: table;
+            width: 100%;
+            height: 100%;
+        }
+
+        .source-row-inner {
+            display: table-row;
+        }
+
+        .source-cell-thumb {
+            display: table-cell;
+            width: 80px;
+            padding: 10px 0;
+            vertical-align: middle;
+            border-bottom: 1px solid #dcdcdc;
+        }
+
+        .source-cell-text {
+            display: table-cell;
+            padding: 10px 10px;
+            vertical-align: middle;
+            font-size: 11pt;
+            color: #333333;
+            border-bottom: 1px solid #dcdcdc;
+        }
+
+        .source-row-inner:last-child .source-cell-thumb,
+        .source-row-inner:last-child .source-cell-text {
+            border-bottom: none;
+        }
+
+        .source-thumb {
+            width: 70px;
+            height: 45px;
+            border-radius: 4px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+        }
+
+        .sources-footer-bar {
+            width: 100%;
+            height: 25px;
+            background-color: #2F4F4F;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: Capa -->
+    <div class="slide">
+        <div class="slide-cover-table">
+            <div class="slide-cover-cell">
+                <h1 class="cover-title-text">Desafios e Perspectivas da Educação Escolar Quilombola no Quilombo Queluz, Anajatuba-MA</h1>
+                <div class="cover-subtitle-text">
+                    Universidade Estadual do Maranhão – UEMA<br>
+                    Programa de Formação Docente para a Diversidade Étnica do Maranhão – PROETNOS<br>
+                    Licenciatura em Educação do Campo / Ciências Humanas
+                </div>
+                <p class="cover-authors-text">Autoras: Luciana Mendes da Conceição e Natiane Cardoso Dutra</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: Apresentação da Comunidade -->
+    <div class="slide slide-content">
+        <div class="slide-header">
+            <h2>Apresentação da Comunidade</h2>
+        </div>
+        <div class="layout-table">
+            <div class="text-column-cell">
+                <ul>
+                    <li><strong>Localização:</strong> Anajatuba (MA), Baixada Maranhense, próximo à BR-135.</li>
+                    <li><strong>Dados (2025):</strong> 409 pessoas, 145 famílias. Área de 243 hectares (INCRA, 2023).</li>
+                    <li><strong>Origem:</strong> Fundado em 1890, com a lenda do camponês "aquele lugar deveria ter luz".</li>
+                    <li><strong>Resistência Viva:</strong> Memória preservada por guardiãs (Dona Augusta, Dona Biluca) e pelo Museu do Ofício Raízes da Resistência.</li>
+                </ul>
+            </div>
+            <div class="image-column-cell">
+                <img src="assets/slide2.png" alt="Imagem da Comunidade" class="slide-image">
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: Apresentação da Escola -->
+    <div class="slide slide-content">
+        <div class="slide-header">
+            <h2>Apresentação da Escola</h2>
+        </div>
+        <div class="layout-table">
+            <div class="text-column-cell">
+                <ul>
+                    <li><strong>Origem (1974):</strong> Criada na casa do Prof. Domingos como Escola Municipal de Pedrinhas.</li>
+                    <li><strong>Estrutura (2013):</strong> Mudança para prédio amplo e moderno com 6 salas, biblioteca e informática.</li>
+                    <li><strong>Identidade (2017):</strong> Nome alterado em homenagem ao líder "Patrício Preto", símbolo da territorialização.</li>
+                    <li><strong>Atendimento:</strong> 186 alunos nas etapas de Educação Infantil e Ensino Fundamental.</li>
+                    <li><strong>Relação Comunitária:</strong> Ponte entre o espaço escolar e a resistência territorial, permeada por tensões burocráticas.</li>
+                </ul>
+            </div>
+            <div class="image-column-cell">
+                <img src="assets/slide3.png" alt="Imagem da Escola" class="slide-image">
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: Objetivos -->
+    <div class="slide slide-content">
+        <div class="slide-header">
+            <h2>Objetivos</h2>
+        </div>
+        <div class="text-full-width">
+            <ul>
+                <li><strong>Objetivo Geral:</strong> Diagnosticar a situação educacional da U.I. Patrício Bonifácio Cardoso e analisar a efetividade da gestão na promoção da Educação Escolar Quilombola.</li>
+                <li><strong>Objetivos Específicos:</strong>
+                    <ul>
+                        <li>Analisar os avanços alcançados na adaptação curricular.</li>
+                        <li>Identificar lacunas estruturais, de recursos e de formação continuada que interferem na valorização africana.</li>
+                        <li>Refletir criticamente sobre os entraves no cumprimento das diretrizes curriculares quilombolas.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: Metodologia -->
+    <div class="slide slide-content">
+        <div class="slide-header">
+            <h2>Metodologia</h2>
+        </div>
+        <div class="layout-table">
+            <div class="text-column-cell">
+                <ul>
+                    <li><strong>Abordagem:</strong> Qualitativa, cruzando análise documental e vivência de campo.</li>
+                    <li><strong>Análise Documental:</strong> Exame do PPP, planos de ensino bimestrais e projetos como "Arte e Cor".</li>
+                    <li><strong>Entrevistas:</strong> Gestão, docentes, discentes (6º, 8º, 9º anos), mães e lideranças do Quilombo.</li>
+                    <li><strong>Observação Participante:</strong> Notas de campo sobre o cotidiano escolar e visita ao Museu do Ofício.</li>
+                </ul>
+            </div>
+            <div class="image-column-cell">
+                <img src="assets/slide5.png" alt="Imagem Metodologia" class="slide-image">
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: Referencial Teórico -->
+    <div class="slide slide-content">
+        <div class="slide-header">
+            <h2>Referencial Teórico</h2>
+        </div>
+        <div class="text-full-width">
+            <ul>
+                <li><strong>Eixos Conceituais:</strong> Educação como Prática da Liberdade, Educação do Campo, Território e Questão Agrária.</li>
+                <li><strong>Autores Base:</strong> Paulo Freire (emancipação); Caldart e Molina (identidade); Haesbaert (território); Sauer e Ianni (questão agrária).</li>
+                <li><strong>Relações Raciais:</strong> Arroyo, Nilma Lino Gomes e Kabengele Munanga.</li>
+                <li><strong>Cultura e Identidade:</strong> Amadou Hampâté Bâ (tradição oral) e Stuart Hall (identidade cultural).</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: Resultados -->
+    <div class="slide slide-content">
+        <div class="slide-header">
+            <h2>Resultados e Discussões</h2>
+        </div>
+        <div class="layout-table">
+            <div class="text-column-cell">
+                <ul>
+                    <li><strong>Gestão e Práxis:</strong> Projetos permanentes de valorização local ("Arte e Cor") e parcerias externas (FGV, Vale).</li>
+                    <li><strong>Desafios Materiais:</strong> Acesso restrito ao PPP e ausência de livros didáticos específicos sobre o quilombo.</li>
+                    <li><strong>Acolhimento Sociolinguístico:</strong> Valorização da variação linguística regional pelos docentes.</li>
+                    <li><strong>Vozes da Comunidade:</strong>
+                        <ul>
+                            <li>Saberes tradicionais ainda isolados em eventos sazonais.</li>
+                            <li>Insegurança linguística e pressão para "adaptar a fala".</li>
+                            <li>Crítica à lógica do êxodo: formação para sair do campo, não para permanecer.</li>
+                            <li>Distanciamento dos docentes em atividades extraclasse propostas pelos jovens.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="image-column-cell">
+                <img src="assets/slide7.png" alt="Imagem Resultados" class="slide-image">
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 8: Desafios nas Tradições -->
+    <div class="slide slide-content">
+        <div class="slide-header">
+            <h2>Desafios nas Tradições</h2>
+        </div>
+        <div class="text-full-width">
+            <ul>
+                <li><strong>Tecnologia x Oralidade:</strong> Concorrência das redes sociais com a memória ancestral, exigindo o uso da tecnologia para registrar a história.</li>
+                <li><strong>Distanciamento Geracional:</strong> Dificuldade de manter um fluxo constante de escuta dos guardiões da memória na sala de aula.</li>
+                <li><strong>Dilema da Permanência:</strong> Currículo urbano que desvaloriza as práticas agrícolas e tradicionais para as novas gerações.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SLIDE 9: Conclusão -->
+    <div class="slide slide-content">
+        <div class="slide-header">
+            <h2>Conclusão e Recomendações</h2>
+        </div>
+        <div class="layout-table">
+            <div class="text-column-cell">
+                <ul>
+                    <li><strong>Democratizar o PPP:</strong> Digitalizar e socializar o documento com toda a comunidade.</li>
+                    <li><strong>Currículo Transdisciplinar:</strong> Inserir histórias locais e cartografia social diariamente nas matérias de base.</li>
+                    <li><strong>Grupo de Trabalho (GT):</strong> Unir professores e comunidade para produzir materiais didáticos do Museu do Ofício.</li>
+                    <li><strong>Acolhimento Linguístico:</strong> Promover oficinas de combate ao preconceito linguístico.</li>
+                    <li><strong>Projetos de Permanência:</strong> Alinhar os projetos de vida dos alunos ao desenvolvimento sustentável do território.</li>
+                </ul>
+            </div>
+            <div class="image-column-cell">
+                <img src="assets/slide9.png" alt="Imagem Conclusão" class="slide-image">
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 10: Bibliografia -->
+    <div class="slide slide-content">
+        <div class="slide-header">
+            <h2>Bibliografia</h2>
+        </div>
+        <div class="biblio-table">
+            <div class="biblio-column-cell">
+                <div class="biblio-section">
+                    <h3>Livros Completos</h3>
+                    <p>ARROYO, M. G. Outros Sujeitos, Outras Pedagogias. Vozes, 2021.</p>
+                    <p>FREIRE, P. Educação como prática da liberdade. Paz e Terra, 1967.</p>
+                    <p>GOMES, N. L. Movimento Negro Educador. Vozes, 2017.</p>
+                    <p>HALL, S. A identidade cultural na pós-modernidade. Lamparina, 2019.</p>
+                </div>
+                <div class="biblio-section">
+                    <h3>Capítulos e Artigos</h3>
+                    <p>BÂ, A. H. A tradição viva. In: KI-ZERBO (org.) História geral da África. UNESCO, 2010.</p>
+                    <p>CALDART, R. S. Educação do Campo e Identidade. Dicionário da Educação do Campo, 2012.</p>
+                    <p>SOUSA, M. F. A Educação Quilombola no Maranhão. Rev. Bras. de Educação, 2023.</p>
+                </div>
+            </div>
+            <div class="biblio-column-cell">
+                <div class="biblio-section">
+                    <h3>Leis e Normas</h3>
+                    <p>BRASIL. Parecer CNE/CEB n° 16/2012. Diretrizes Curriculares Nacionais para a Educação Escolar Quilombola. 2012.</p>
+                    <p>MARANHÃO. Documento Curricular do Território Maranhense. SEDUC, 2019.</p>
+                </div>
+                <div class="biblio-section">
+                    <h3>Entrevistas (Trabalho de Campo)</h3>
+                    <p>CORREA, Domingos (Gestor).</p>
+                    <p>MARTINS, César (Docente).</p>
+                    <p>CONCEIÇÃO, Maria dos Santos (Liderança).</p>
+                    <p>ROCHA, Lindinalva (Liderança).</p>
+                    <p>CRISTINA, Elaine (Discente 9º ano).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 11: Fontes das Imagens -->
+    <div class="slide slide-image-sources">
+        <div class="sources-row-head">
+            <div class="sources-header-bar"></div>
+        </div>
+        <div class="sources-row-body">
+            <div class="sources-body">
+                <h1 class="sources-title">Image Sources</h1>
+                <div class="sources-table-inner">
+                    <div class="source-row-inner">
+                        <div class="source-cell-thumb">
+                            <img src="assets/slide2.png" alt="Imagem Slide 2" class="source-thumb">
+                        </div>
+                        <div class="source-cell-text"><strong>Fonte:</strong> Luciana Mendes da Conceição</div>
+                    </div>
+                    <div class="source-row-inner">
+                        <div class="source-cell-thumb">
+                            <img src="assets/slide3.png" alt="Imagem Slide 3" class="source-thumb">
+                        </div>
+                        <div class="source-cell-text"><strong>Fonte:</strong> Ane Caroline da Conceição Nascimento, 2026</div>
+                    </div>
+                    <div class="source-row-inner">
+                        <div class="source-cell-thumb">
+                            <img src="assets/slide5.png" alt="Imagem Slide 5" class="source-thumb">
+                        </div>
+                        <div class="source-cell-text"><strong>Fonte:</strong> Luciana Mendes da Conceição</div>
+                    </div>
+                    <div class="source-row-inner">
+                        <div class="source-cell-thumb">
+                            <img src="assets/slide7.png" alt="Imagem Slide 7" class="source-thumb">
+                        </div>
+                        <div class="source-cell-text"><strong>Fonte:</strong> Domingos Silva Correa, 2025</div>
+                    </div>
+                    <div class="source-row-inner">
+                        <div class="source-cell-thumb">
+                            <img src="assets/slide9.png" alt="Imagem Slide 9" class="source-thumb">
+                        </div>
+                        <div class="source-cell-text"><strong>Fonte:</strong> Luciana Mendes da Conceição, 2026</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sources-row-foot">
+            <div class="sources-footer-bar"></div>
+        </div>
+    </div>
+
+</body>
+</html>
